@@ -1,0 +1,293 @@
+{
+  "token": {
+    "colorPrimary": "#27b7bb",
+    "colorInfo": "#4277cf",
+    "colorSuccess": "#008d71",
+    "colorWarning": "#f38b18",
+    "colorError": "#e34949",
+    "colorTextBase": "#434343",
+    "borderRadius": 4,
+    "colorLink": "#27b7bb",
+    "colorSuccessBg": "#f0f7f5",
+    "colorSuccessBgHover": "#dfeee8",
+    "colorSuccessBorder": "#a4d4c7",
+    "colorSuccessBorderHover": "#78c1ae",
+    "colorWarningBg": "#fff9ee",
+    "colorWarningBgHover": "#fef4dc",
+    "colorWarningBorder": "#fbc67a",
+    "colorWarningBorderHover": "#f7a842",
+    "colorErrorBg": "#fef2f2",
+    "colorErrorBgHover": "#fde6e6",
+    "colorErrorBorder": "#f39292",
+    "colorErrorBorderHover": "#ec6a6a",
+    "colorErrorHover": "#d83c3c",
+    "colorWarningHover": "#dd7b13",
+    "colorSuccessHover": "#007e64",
+    "colorPrimaryHover": "#188c94",
+    "colorInfoBg": "#eaf1fb",
+    "colorInfoBgHover": "#d7e3f7",
+    "colorInfoBorder": "#afc4ed",
+    "colorInfoBorderHover": "#8eaae4",
+    "colorInfoHover": "#3a69b8",
+    "colorText": "#434343",
+    "colorTextSecondary": "#595959",
+    "colorTextTertiary": "#8c8c8c",
+    "colorTextQuaternary": "#bfbfbf"
+  },
+  "components": {
+    "Typography": {
+      "lineHeight": 1.5,
+      "lineHeightHeading1": 1.25,
+      "lineHeightHeading2": 1.25,
+      "lineHeightHeading3": 1.25,
+      "fontFamilyCode": "'Outfit', sans-serif",
+      "fontWeightStrong": 500
+    },
+    "Button": {
+      "paddingInline": 16,
+      "paddingInlineLG": 16,
+      "paddingInlineSM": 8,
+      "borderRadius": 4,
+      "borderRadiusLG": 4,
+      "contentLineHeight": 1.5,
+      "contentLineHeightSM": 1.5
+    },
+    "Layout": {
+      "bodyBg": "rgb(250,250,250)",
+      "headerBg": "rgb(67,67,67)",
+      "headerColor": "rgb(67,67,67)",
+      "footerBg": "rgb(250,250,250)",
+      "siderBg": "rgb(67,67,67)",
+      "triggerBg": "rgb(67,67,67)",
+      "colorText": "rgb(67,67,67)"
+    },
+    "Menu": {
+      "itemColor": "rgb(255,255,255)",
+      "itemSelectedBg": "rgb(39,183,187)",
+      "itemSelectedColor": "rgb(255,255,255)",
+      "subMenuItemBg": "rgb(38,38,38)",
+      "subMenuItemSelectedColor": "rgb(255,255,255)",
+      "itemActiveBg": "rgb(67,67,67)",
+      "itemBg": "rgb(67,67,67)",
+      "iconSize": 20,
+      "itemHeight": 46,
+      "groupTitleFontSize": 16,
+      "groupTitleLineHeight": 1.375,
+      "groupTitleColor": "rgb(255,255,255)",
+      "itemHoverColor": "rgb(255,255,255)",
+      "fontSize": 16,
+      "lineHeight": 1.375,
+      "itemBorderRadius": 4,
+      "fontFamily": "'Lato', sans-serif",
+      "margin": 12,
+      "iconMarginInlineEnd": 12,
+      "itemMarginInline": 8
+    },
+    "Dropdown": {
+      "colorText": "rgb(255,255,255)",
+      "colorTextDisabled": "rgb(255,255,255)",
+      "colorTextDescription": "rgb(255,255,255)",
+      "fontFamily": "'Lato', sans-serif",
+      "lineHeight": 1.375
+    },
+    "Cascader": {
+      "fontSizeIcon": 14,
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Input": {
+      "fontFamily": "'Lato', sans-serif",
+      "lineHeight": 1.5
+    },
+    "Radio": {
+      "fontFamily": "'Lato', sans-serif",
+      "lineHeight": 1.5
+    },
+    "Rate": {
+      "starColor": "rgb(255,202,44)",
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "TreeSelect": {
+      "indentSize": 12,
+      "titleHeight": 24,
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Card": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Empty": {
+      "lineHeight": 1.5
+    },
+    "Descriptions": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Collapse": {
+      "fontFamily": "'Lato', sans-serif",
+      "lineHeight": 1.5
+    },
+    "Carousel": {
+      "fontFamily": "'Lato', sans-serif",
+      "lineHeight": 1.5
+    },
+    "Calendar": {
+      "fontFamily": "'Lato', sans-serif",
+      "lineHeight": 1.5
+    },
+    "Badge": {
+      "fontFamily": "'Lato', sans-serif",
+      "lineHeight": 1.5
+    },
+    "Avatar": {
+      "fontFamily": "'Lato', sans-serif",
+      "lineHeight": 1.5
+    },
+    "Upload": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Transfer": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Switch": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Slider": {
+      "fontFamily": "'Lato', sans-serif",
+      "lineHeight": 1.5
+    },
+    "Select": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Mentions": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "InputNumber": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Form": {
+      "fontFamily": "'Lato', sans-serif",
+      "lineHeight": 1.5
+    },
+    "DatePicker": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Checkbox": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Steps": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Pagination": {
+      "fontFamily": "'Lato', sans-serif",
+      "lineHeight": 1.5
+    },
+    "Breadcrumb": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Anchor": {
+      "fontFamily": "'Lato', sans-serif",
+      "lineHeight": 1.5
+    },
+    "Divider": {
+      "fontFamily": "'Lato', sans-serif",
+      "lineHeight": 1.5
+    },
+    "List": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Popover": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Segmented": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Statistic": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Table": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Tabs": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Tag": {
+      "lineHeight": 1.75,
+      "lineHeightSM": 1.75,
+      "fontFamily": "'Lato', sans-serif",
+      "defaultColor": "rgb(67,67,67)"
+    },
+    "Timeline": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Tooltip": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Tree": {
+      "fontFamily": "'Lato', sans-serif",
+      "lineHeight": 1.5
+    },
+    "Alert": {
+      "lineHeight": 1.5,
+      "colorSuccessBg": "rgb(240,247,245)",
+      "colorSuccessBorder": "rgb(164,212,199)",
+      "colorInfoBg": "rgb(234,241,251)",
+      "colorInfoBorder": "rgb(175,196,237)",
+      "colorWarningBorder": "rgb(251,198,122)",
+      "colorWarningBg": "rgb(255,249,238)",
+      "colorErrorBg": "rgb(254,242,242)",
+      "colorErrorBorder": "rgb(243,146,146)",
+      "colorTextHeading": "rgb(67,67,67)",
+      "colorText": "rgb(67,67,67)",
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Message": {
+      "colorText": "rgb(67,67,67)",
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Modal": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Notification": {
+      "fontFamily": "'Lato', sans-serif",
+      "lineHeight": 1.5
+    },
+    "Progress": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    },
+    "Result": {
+      "lineHeightHeading3": 1.25,
+      "lineHeight": 1.5
+    },
+    "Skeleton": {
+      "paragraphLiHeight": 12
+    },
+    "Spin": {
+      "lineHeight": 1.5,
+      "fontFamily": "'Lato', sans-serif"
+    }
+  }
+}

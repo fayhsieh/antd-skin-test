@@ -1,0 +1,383 @@
+/* ============================================================================
+ *  深度客製的 CSS 覆寫。只有 data-skin="deep" 時生效。
+ *  每一段上面都寫了「為什麼 token 做不到」，這些就是 FINDINGS-2.md 的成本來源。
+ *
+ *  兩個 scope：
+ *    .page[data-skin='deep']  → 頁面內的東西
+ *    body.deep-skin           → 浮層（dropdown / date panel 走 portal，掛在 body 底下，
+ *                                頁面層的 scope 蓋不到，只能另外在 body 上掛 class）
+ * ========================================================================= */
+
+/* ---------------------------------------------------------------------------
+ * 0. 覆寫 antd 6 的 CSS 變數
+ *    antd 6 把變數定義在元件自己的根節點上（`.css-var-xxx.ant-table-css-var{…}`，
+ *    兩個 class 的 specificity），所以掛在祖先的變數不會贏。
+ *    必須用「祖先 + 元件根節點」把 specificity 墊到 3 個以上才蓋得過去。
+ * ------------------------------------------------------------------------ */
+.page[data-skin='deep'] .ant-table-css-var {
+  /* ⚠ 這裡原本寫 transparent，結果固定欄的表頭「透出」底下捲動的欄位 ——
+     antd 的固定欄是靠 sticky + 背景色遮住下層，表頭一透明就破功。
+     必須給不透明色。這是深度客製踩到的第一個副作用。 */
+  --ant-table-header-bg: #ffffff;
+  --ant-table-header-color: #8c8c8c;
+  --ant-table-header-split-color: transparent;
+  --ant-table-border-color: #ececec;
+  --ant-table-row-hover-bg: #f7fbfb;
+  --ant-table-row-selected-bg: #eef8f8;
+  --ant-table-row-selected-hover-bg: #e3f3f3;
+  --ant-table-row-expanded-bg: #fafafa;
+  --ant-table-body-sort-bg: transparent;
+  /* 同理：排序中的表頭底色也不能透明，否則固定欄會破 */
+  --ant-table-header-sort-active-bg: #ffffff;
+  --ant-table-header-sort-hover-bg: #fafafa;
+  --ant-table-cell-padding-block-md: 10px;
+  --ant-table-cell-padding-inline-md: 14px;
+  --ant-table-header-border-radius: 0;
+}
+
+/* ---------------------------------------------------------------------------
+ * 1. 表頭：AntD 的招牌是「灰底 + 粗體 + 圓角」。改成「無底色 + 小字 + 字距 + 雙線」。
+ *    token 做不到的部分：字距（沒有 letterSpacing token）、表頭獨立的字級與粗細
+ *    （cellFontSize 是表頭跟內容共用）、表頭下方的雙線。
+ * ------------------------------------------------------------------------ */
+.page[data-skin='deep'] .ant-table-thead > tr > th {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding-block: 6px;
+  border-bottom: 2px solid #434343 !important;
+}
+
+/* ---------------------------------------------------------------------------
+ * 2. 排序指示：antd 預設是標題右邊上下兩個小三角。
+ *    icon 本身可以用 column.sortIcon 換，但「位置」沒有任何 API，只能用 CSS order。
+ * ------------------------------------------------------------------------ */
+.page[data-skin='deep'] .ant-table-column-sorters {
+  justify-content: flex-start;
+  gap: 6px;
+}
+.page[data-skin='deep'] .ant-table-column-sorter {
+  order: -1; /* 搬到標題文字前面 */
+  margin-inline-start: 0;
+}
+.page[data-skin='deep'] .ant-table-column-title {
+  flex: 0 1 auto;
+}
+.page[data-skin='deep'] .deep-sort {
+  display: inline-flex;
+  color: #d9d9d9;
+}
+.page[data-skin='deep'] .deep-sort.on {
+  color: #27b7bb;
+}
+
+/* 篩選入口：從表頭右邊的漏斗，改成標題底下的一條短底線 + 滑桿圖示 */
+.page[data-skin='deep'] .ant-table-filter-trigger {
+  border-radius: 0;
+  margin-inline: 4px -4px;
+  color: #d9d9d9;
+}
+.page[data-skin='deep'] .deep-filter.on {
+  color: #27b7bb;
+}
+.page[data-skin='deep'] .ant-table-filter-column {
+  justify-content: flex-start;
+  gap: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+ * 3. 勾選框的勾。
+ *    antd 的勾不是 icon，是一個用 ::after 畫的旋轉 45 度長方形，
+ *    完全沒有 API 可以換 → 只能把 ::after 關掉，改用 background-image 塞 SVG。
+ *    這是「藏在元件內部」的代表案例。
+ * ------------------------------------------------------------------------ */
+.page[data-skin='deep'] .ant-checkbox .ant-checkbox-inner,
+body.deep-skin .ant-checkbox .ant-checkbox-inner {
+  border-radius: 2px;
+}
+.page[data-skin='deep'] .ant-checkbox-checked .ant-checkbox-inner::after,
+body.deep-skin .ant-checkbox-checked .ant-checkbox-inner::after {
+  display: none;
+}
+.page[data-skin='deep'] .ant-checkbox-checked .ant-checkbox-inner,
+body.deep-skin .ant-checkbox-checked .ant-checkbox-inner {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+  background-size: 11px 11px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* 半選狀態的那一橫也是 ::after 畫的 */
+.page[data-skin='deep'] .ant-checkbox-indeterminate .ant-checkbox-inner::after {
+  border-radius: 0;
+  width: 9px;
+  height: 2.5px;
+}
+
+/* ---------------------------------------------------------------------------
+ * 4. 分頁列。
+ *    itemRender 只能換「每一顆的內容」，整列的排列順序沒有 API，用 order 搬。
+ *    antd 的 DOM 順序是：total → prev → pages → next → options
+ *    改成：       options → total →（prev pages next 靠右）
+ * ------------------------------------------------------------------------ */
+.page[data-skin='deep'] .ant-pagination {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.page[data-skin='deep'] .ant-pagination-total-text {
+  order: 1;
+  margin-inline-end: auto;
+  color: #8c8c8c;
+  font-size: 12px;
+}
+.page[data-skin='deep'] .ant-pagination-options {
+  order: 0;
+  margin-inline-end: 12px;
+}
+.page[data-skin='deep'] .ant-pagination-prev,
+.page[data-skin='deep'] .ant-pagination-item,
+.page[data-skin='deep'] .ant-pagination-next,
+.page[data-skin='deep'] .ant-pagination-jump-prev,
+.page[data-skin='deep'] .ant-pagination-jump-next {
+  order: 2;
+  min-width: 26px;
+  height: 26px;
+  line-height: 26px;
+  border-radius: 0;
+  border: 0;
+  background: transparent;
+}
+.page[data-skin='deep'] .ant-pagination-item-active {
+  background: #434343;
+  border: 0;
+}
+.page[data-skin='deep'] .ant-pagination-item-active .deep-pg-page {
+  color: #fff;
+  font-weight: 600;
+}
+.page[data-skin='deep'] .deep-pg-total b {
+  color: #434343;
+  font-weight: 600;
+}
+.page[data-skin='deep'] .deep-pg-arrow,
+.page[data-skin='deep'] .deep-pg-jump {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* ---------------------------------------------------------------------------
+ * 5. 狀態標籤（完全自己畫，不是 antd Tag）
+ * ------------------------------------------------------------------------ */
+.deep-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 20px;
+  padding-inline: 7px 8px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--chip) 10%, transparent);
+  color: color-mix(in srgb, var(--chip) 80%, #262626);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.deep-chip > i {
+  width: 3px;
+  height: 10px;
+  border-radius: 1px;
+  background: var(--chip);
+}
+
+/* ---------------------------------------------------------------------------
+ * 6. 操作欄：藍字連結 → 圖示按鈕
+ * ------------------------------------------------------------------------ */
+.deep-actions {
+  display: inline-flex;
+  gap: 2px;
+}
+.deep-actions > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: #8c8c8c;
+  cursor: pointer;
+}
+.deep-actions > button:hover {
+  background: #f0f0f0;
+  color: #434343;
+}
+
+/* ---------------------------------------------------------------------------
+ * 7. 展開鈕（ConfigProvider table.expandable.expandIcon 換掉內容，外觀還是要 CSS）
+ * ------------------------------------------------------------------------ */
+.deep-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  background: #fff;
+  color: #8c8c8c;
+  cursor: pointer;
+}
+.deep-expand-btn:hover {
+  border-color: #27b7bb;
+  color: #27b7bb;
+}
+
+/* ---------------------------------------------------------------------------
+ * 8. 空狀態
+ * ------------------------------------------------------------------------ */
+.deep-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 36px 0;
+  color: #bfbfbf;
+}
+.deep-empty p {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+/* ---------------------------------------------------------------------------
+ * 9. 載入中的轉圈：ConfigProvider spin.indicator 換掉了 icon，動畫要自己補
+ * ------------------------------------------------------------------------ */
+.deep-spin {
+  animation: deep-rotate 0.9s linear infinite;
+}
+@keyframes deep-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * 10. 表單控制項：把 antd 的圓角＋內陰影改成方角＋底線優先
+ * ------------------------------------------------------------------------ */
+.page[data-skin='deep'] .ant-input,
+.page[data-skin='deep'] .ant-input-number,
+.page[data-skin='deep'] .ant-input-affix-wrapper,
+.page[data-skin='deep'] .ant-select .ant-select-selector,
+.page[data-skin='deep'] .ant-picker {
+  border-radius: 2px;
+  box-shadow: none;
+}
+.page[data-skin='deep'] .ant-input:focus,
+.page[data-skin='deep'] .ant-input-affix-wrapper-focused,
+.page[data-skin='deep'] .ant-select-focused .ant-select-selector,
+.page[data-skin='deep'] .ant-picker-focused {
+  box-shadow: inset 0 -2px 0 0 #27b7bb !important;
+}
+
+/* 必填星號：antd 放在 label 前面的紅星，改成 label 後面的小點 */
+.page[data-skin='deep'] .ant-form-item-required::before {
+  display: none !important;
+}
+.page[data-skin='deep'] .ant-form-item-required::after {
+  content: '•';
+  color: #e34949;
+  margin-inline-start: 4px;
+  visibility: visible;
+}
+
+/* ---------------------------------------------------------------------------
+ * 11. 浮層（portal）：Select 下拉、日期面板。
+ *     這些不在 .page 底下，掛 body class 才蓋得到。
+ * ------------------------------------------------------------------------ */
+body.deep-skin .ant-select-dropdown,
+body.deep-skin .ant-picker-dropdown .ant-picker-panel-container,
+body.deep-skin .ant-dropdown-menu,
+body.deep-skin .ant-table-filter-dropdown {
+  border-radius: 2px;
+  border: 1px solid #434343;
+  box-shadow: 4px 4px 0 0 rgba(67, 67, 67, 0.12);
+}
+body.deep-skin .ant-select-item {
+  border-radius: 0;
+  padding-block: 6px;
+  font-size: 13px;
+}
+body.deep-skin .ant-select-item-option-selected {
+  background: #434343 !important;
+  color: #fff !important;
+}
+body.deep-skin .ant-select-item-option-active:not(.ant-select-item-option-selected) {
+  background: #f2f2f2 !important;
+}
+body.deep-skin .deep-select-check::after {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* 日期面板：把 antd 的圓形選中改成方塊，表頭改成小字 */
+body.deep-skin .ant-picker-cell .ant-picker-cell-inner {
+  border-radius: 0 !important;
+  min-width: 24px;
+  height: 24px;
+  line-height: 24px;
+}
+body.deep-skin .ant-picker-content th {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: #bfbfbf;
+  text-transform: uppercase;
+}
+body.deep-skin .ant-picker-header {
+  border-bottom: 1px solid #ececec;
+}
+body.deep-skin .ant-picker-header button {
+  color: #8c8c8c;
+}
+
+/* ---------------------------------------------------------------------------
+ * 12. 深度版按鈕（批次操作列用）
+ * ------------------------------------------------------------------------ */
+.deep-btn {
+  height: 26px;
+  padding-inline: 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  background: #fff;
+  color: #434343;
+  font-size: 12px;
+  cursor: pointer;
+}
+.deep-btn:hover {
+  border-color: #434343;
+}
+.deep-btn.danger {
+  color: #e34949;
+  border-color: #f3d0d0;
+}
+
+/* 批次操作列本身 */
+.page[data-skin='deep'] .deep-batchbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  border-inline-start: 3px solid #27b7bb;
+  background: #f5fafa;
+  font-size: 13px;
+}

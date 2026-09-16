@@ -1,0 +1,30 @@
+{
+  "name": "antd-skin-test",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ant-design/icons": "6.3.4",
+    "@ant-design/pro-components": "3.1.14-7",
+    "@types/react-resizable": "^4.0.0",
+    "antd": "6.6.2",
+    "dayjs": "^1.11.13",
+    "lucide-react": "^1.46.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-resizable": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.3",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "~5.6.3",
+    "vite": "^6.4.3"
+  }
+}

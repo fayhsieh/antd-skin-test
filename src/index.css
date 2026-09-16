@@ -1,0 +1,52 @@
+/* 只有兩件事：頁面容器，以及 react-resizable 的拖曳把手。
+   刻意不加任何表格美化 —— 要看的是 antd 原本的樣子。 */
+
+body {
+  margin: 0;
+  background: #f0f2f5;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Noto Sans TC',
+    'Segoe UI', Roboto, sans-serif;
+}
+
+.page {
+  padding: 16px 20px 48px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+/* ── 欄寬拖曳用 ──────────────────────────────────────────────────────
+   react-resizable 只給行為不給樣式，把手是完全看不見的，必須自己畫。
+   這段就是 FINDINGS.md 裡「欄寬拖曳＝要寫 CSS」的實際內容。 */
+.react-resizable {
+  position: relative;
+  background-clip: padding-box;
+}
+
+.react-resizable-handle {
+  position: absolute;
+  inset-inline-end: -5px;
+  bottom: 0;
+  z-index: 1;
+  width: 10px;
+  height: 100%;
+  cursor: col-resize;
+  background-size: 0;
+}
+
+.react-resizable-handle::after {
+  content: '';
+  position: absolute;
+  inset-inline-end: 5px;
+  top: 25%;
+  height: 50%;
+  border-inline-end: 2px solid rgba(0, 0, 0, 0.12);
+}
